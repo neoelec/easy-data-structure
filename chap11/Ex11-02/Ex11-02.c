@@ -10,11 +10,11 @@ static int INT_Compare(const void *_a, const void *_b)
     return a - b;
 }
 
-static void __sequentialSearch(void **ptr_arr, size_t nmemb, int key)
+static void __sequentialSearch(int *data, size_t nmemb, int key)
 {
     printf("\n %d를 검색하여라! ->> ", key);
 
-    if (LinearSearch(&key, ptr_arr, nmemb, INT_Compare))
+    if (LinearSearch(&key, data, nmemb, sizeof(data[0]), INT_Compare))
         printf("검색 성공! \n\n");
     else
         printf("검색 실패! \n\n");
@@ -23,14 +23,9 @@ static void __sequentialSearch(void **ptr_arr, size_t nmemb, int key)
 int main(int argc, char *argv[])
 {
     int data[] = { 1, 2, 8, 9, 11, 19, 29 };
-    void *ptr_arr[NR_ELEM(data)];
-    size_t i;
 
-    for (i = 0; i < NR_ELEM(data); i++)
-        ptr_arr[i] = &data[i];
-
-    __sequentialSearch(ptr_arr, NR_ELEM(data), 9);
-    __sequentialSearch(ptr_arr, NR_ELEM(data), 6);
+    __sequentialSearch(data, NR_ELEM(data), 9);
+    __sequentialSearch(data, NR_ELEM(data), 6);
 
     return 0;
 }
